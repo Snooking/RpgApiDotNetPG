@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RpgApi.Models;
 using RpgApi.Services;
+using RpgApi.WebModels;
 using System.Collections.Generic;
 
 namespace RpgApi.Controllers
@@ -18,15 +19,33 @@ namespace RpgApi.Controllers
         }
 
         [HttpGet(Route)]
-        public ActionResult<List<Character>> Get()
+        public ActionResult<List<Character>> Get([FromQuery] bool? isAlive)
         {
-            return _charactersService.GetAll();
+            return _charactersService.GetAll(isAlive);
         }
 
         [HttpGet(Route + "{id}")]
-        public ActionResult<Character> GetById(int id)
+        public ActionResult<Character> GetById([FromRoute] int id)
         {
             return _charactersService.GetById(id);
+        }
+
+        [HttpPost(Route)]
+        public ActionResult<Character> AddCharacter([FromBody] CharacterWebModel characterWebModel)
+        {
+            return _charactersService.AddCharacter(characterWebModel);
+        }
+
+        [HttpPut(Route + "{id}")]
+        public ActionResult<Character> DealDamageToCharacter([FromRoute] int id, [FromBody] HpToTakeFromCharacterWebModel webModel)
+        {
+            return _charactersService.DealDamageToCharacter(id, webModel);
+        }
+
+        [HttpDelete(Route + "{id}")]
+        public ActionResult<Character> DeleteCharacter([FromRoute] int id)
+        {
+            return _charactersService.DeleteCharacter(id);
         }
     }
 }

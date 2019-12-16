@@ -23,7 +23,7 @@ namespace RpgApi
                     Id = 2,
                     Name = "Huzdy",
                     Dmg = 5,
-                    Hp = 11
+                    Hp = 0
                 }
             };
         }
