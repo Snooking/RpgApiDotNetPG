@@ -11,11 +11,11 @@ namespace RpgApi.Controllers
     {
         private const string Route = "api/characters/";
 
-        private CharactersService _charactersService;
+        private ICharactersService _charactersService;
 
-        public CharactersController()
+        public CharactersController(ICharactersService charactersService)
         {
-            _charactersService = new CharactersService();
+            _charactersService = charactersService;
         }
 
         [HttpGet(Route)]

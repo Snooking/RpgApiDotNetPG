@@ -6,7 +6,16 @@ using System.Linq;
 
 namespace RpgApi.Services
 {
-    public class CharactersService
+    public interface ICharactersService
+    {
+        ActionResult<List<Character>> GetAll(bool? isAlive);
+        ActionResult<Character> GetById(int id);
+        ActionResult<Character> AddCharacter(CharacterWebModel characterWebModel);
+        ActionResult<Character> DealDamageToCharacter(int id, HpToTakeFromCharacterWebModel webModel);
+        ActionResult<Character> DeleteCharacter(int id);
+    }
+
+    public class CharactersService : ICharactersService
     {
         private static DataContext _dataContext;
 
