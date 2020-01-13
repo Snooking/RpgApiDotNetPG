@@ -17,14 +17,11 @@ namespace RpgApi.Services
 
     public class CharactersService : ICharactersService
     {
-        private static DataContext _dataContext;
+        private DataContext _dataContext;
 
-        public CharactersService()
+        public CharactersService(DataContext dataContext)
         {
-            if (_dataContext == null)
-            {
-                _dataContext = new DataContext();
-            }
+            _dataContext = dataContext;
         }
 
         public ActionResult<List<Character>> GetAll(bool? isAlive)
